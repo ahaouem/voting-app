@@ -24,12 +24,15 @@ export default function CategoriesNavbar({ userId }: { userId: string }): JSX.El
             <ScrollArea className="whitespace-nowrap">
                 <div className="flex space-x-4">
                     {categories.map((category) => (
-                        <button key={category} className="text-sm text-gray-500 hover:text-gray-800 cursor-pointer">
+                        <button
+                            key={category}
+                            className="text-sm text-white hover:bg-zinc-800 px-3 py-2 rounded-full cursor-pointer"
+                        >
                             {category}
                         </button>
                     ))}
                 </div>
-                <ScrollBar orientation="horizontal" />
+                <ScrollBar orientation="horizontal" className="bg-zinc-800 h-1 w-full rounded-full mt-2" />
             </ScrollArea>
         </div>
     );
