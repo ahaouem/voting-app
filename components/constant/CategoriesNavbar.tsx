@@ -21,7 +21,7 @@ export default function CategoriesNavbar({ userId }: { userId: string }): JSX.El
 
     return (
         <div className="w-full overflow-x-auto">
-            <ScrollArea className="whitespace-nowrap rounded-md border">
+            <ScrollArea className="whitespace-nowrap">
                 <div className="flex space-x-4 p-4">
                     {categories.map((category) => (
                         <button key={category} className="text-sm text-gray-500 hover:text-gray-800 cursor-pointer">
