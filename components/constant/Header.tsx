@@ -1,3 +1,4 @@
+import Link from "next/link";
 import CategoriesNavbar from "./CategoriesNavbar";
 import { Bell } from "lucide-react";
 
@@ -8,9 +9,12 @@ export default function Header({ userId }: { userId: string }) {
                 {/* Logo */}
                 <h1 className="text-3xl font-bold">Cloak</h1>
                 {/* User profile / notifications */}
-                <button className="border rounded-full p-2 w-10 h-10 flex items-center justify-center">
+                <Link
+                    href={"/notifications"}
+                    className="border rounded-full p-2 w-10 h-10 flex items-center justify-center"
+                >
                     <Bell size={14} />
-                </button>
+                </Link>
             </header>
             <CategoriesNavbar userId={userId} />
         </section>
