@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/Button";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/Select";
 import { IVotingInputs } from "@/types";
 import { FormEvent, KeyboardEvent, useState } from "react";
+import { firstInputs, optionsInputs, selectOptions, timezoneOptions } from "@/lib/options";
+import { Label } from "@/components/ui/Label";
 
 export default function Page(): JSX.Element {
     const [title, setTitle] = useState<string>("");
@@ -17,55 +19,87 @@ export default function Page(): JSX.Element {
     const [allowList, setAllowList] = useState<string[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
     const [selectedUser, setSelectedUser] = useState<string>("");
+    const [selectedTimezone, setSelectedTimezone] = useState<string>("");
 
-    const inputs: IVotingInputs[] = [
-        { type: "text", name: "title", placeholder: "Title" },
-        { type: "text", name: "description", placeholder: "Description" },
-        { type: "url", name: "img", placeholder: "Image" },
-        { type: "time", name: "endtime", placeholder: "End Time" },
-    ];
-    const selectOptions = { options: ["Public", "Private"], placeholder: "Visibility" };
-    const optionsInputs: IVotingInputs[] = [
-        { type: "text", name: "option1", placeholder: "First Option" },
-        { type: "text", name: "option2", placeholder: "Second Options" },
-    ];
-
-    const handleSubmit = async () => {
+    const handleSubmit = async (): Promise<void> => {
         try {
             setLoading(true);
-            console.log({ title, description, img, endtime, isPrivate, option1, option2, allowList });
+            console.log({ title, description, img, endtime, selectedTimezone, isPrivate, option1, option2, allowList });
         } catch (error) {
             console.error(error);
         } finally {
             setLoading(false);
         }
     };
+    const handleSetIsPrivate = (value: boolean) => {
+        setIsPrivate(value);
+    };
+
+    const handleSetSelectedTimezone = (tz: string) => {
+        setSelectedTimezone(tz);
+    };
 
     return (
         <main className="p-5 flex flex-col items-start justify-start gap-y-3">
-            {inputs.map((input: IVotingInputs) => (
-                <Input
-                    key={input.name}
-                    {...input}
-                    className="font-semibold"
-                    onChange={(e: FormEvent<HTMLInputElement>) => {
-                        switch (input.name) {
-                            case "title":
-                                setTitle(e.currentTarget.value);
-                                break;
-                            case "description":
-                                setDescription(e.currentTarget.value);
-                                break;
-                            case "img":
-                                setImg(e.currentTarget.value);
-                                break;
-                            case "endtime":
-                                setEndtime(e.currentTarget.value);
-                                break;
-                        }
-                    }}
-                />
-            ))}
+            {firstInputs.map(
+                (input): JSX.Element => (
+                    <>
+                        <Label
+                            key={input.name}
+                            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                        >
+                            {input.placeholder}
+                        </Label>
+                        <Input
+                            key={input.name}
+                            {...input}
+                            className="font-semibold"
+                            onChange={(e: FormEvent<HTMLInputElement>) => {
+                                switch (input.name) {
+                                    case "title":
+                                        setTitle(e.currentTarget.value);
+                                        break;
+                                    case "description":
+                                        setDescription(e.currentTarget.value);
+                                        break;
+                                    case "img":
+                                        setImg(e.currentTarget.value);
+                                        break;
+                                }
+                            }}
+                        />
+                    </>
+                ),
+            )}
+            <section className="w-full">
+                <Label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                    End Time
+                </Label>
+                <div className="grid grid-cols-4 gap-x-3 w-full">
+                    <Input
+                        className="col-span-3 w-full"
+                        type="time"
+                        name="endtime"
+                        placeholder="End Time"
+                        value={endtime}
+                        onChange={(e: FormEvent<HTMLInputElement>) => setEndtime(e.currentTarget.value)}
+                    />
+                    <Select>
+                        <SelectTrigger className="col-span-1 w-full">
+                            <SelectValue placeholder="timezone" />
+                        </SelectTrigger>
+                        <SelectContent>
+                            {timezoneOptions.map(
+                                (tz: string): JSX.Element => (
+                                    <SelectItem key={tz} value={tz} onChange={() => handleSetSelectedTimezone(tz)}>
+                                        {tz}
+                                    </SelectItem>
+                                ),
+                            )}
+                        </SelectContent>
+                    </Select>
+                </div>
+            </section>
             <section>
                 <Select>
                     <SelectTrigger className="w-full">
@@ -78,7 +112,7 @@ export default function Page(): JSX.Element {
                                     className="w-full"
                                     key={option}
                                     value={option}
-                                    onChange={() => setIsPrivate(option === "Private" ? true : false)}
+                                    onChange={() => handleSetIsPrivate(option === "Private")}
                                 >
                                     {option}
                                 </SelectItem>
@@ -103,9 +137,11 @@ export default function Page(): JSX.Element {
                 )}
             </section>
 
-            <section className="flex flex-col items-start justify-between">
-                <h1>Choose an options</h1>
-                <div className="flex items-center justify-between gap-x-3">
+            <section className="flex flex-col items-start justify-between w-full gap-y-3">
+                <h1 className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                    Choose an options
+                </h1>
+                <div className="grid grid-cols-2 gap-x-3 w-full">
                     {optionsInputs.map((input: IVotingInputs) => (
                         <Input
                             key={input.name}
