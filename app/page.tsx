@@ -5,7 +5,7 @@ import VotingsSection from "@/components/vote/VotingsSection";
 
 export default function Home() {
     return (
-        <main className="bg-black text-white">
+        <main className="bg-black text-white w-screen">
             <Header userId={"1"} />
             <VotingsSection />
             <Footer />
