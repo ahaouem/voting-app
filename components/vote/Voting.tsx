@@ -52,7 +52,7 @@ export default function Voting({
                     </Link>
                     <div>{formatTimeToNow(timestamp)}</div>
                 </section>
-                <Link href={`/${voting_id}`} className="text-left font-bold text-4xl hover:underline">
+                <Link href={`/v/${voting_id}`} className="text-left font-bold text-4xl hover:underline">
                     {title}
                 </Link>
                 <section className="w-full flex gap-x-5 items-center justify-between">
