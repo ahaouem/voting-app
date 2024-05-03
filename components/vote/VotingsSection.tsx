@@ -7,7 +7,8 @@ export default function VotingsSection() {
             {mockVotings.map((voting) => (
                 <Voting
                     key={voting.title}
-                    voting_id={voting.id}
+                    user_id={voting.id}
+                    voting_id={voting.voting_id}
                     userPic={voting.userPic}
                     username={voting.username}
                     timestamp={voting.timestamp}

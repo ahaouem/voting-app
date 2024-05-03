@@ -3,6 +3,7 @@ import { randomBytes, randomInt, randomUUID } from "crypto";
 export const mockVotings = [
     {
         id: randomUUID(),
+        voting_id: randomUUID(),
         userPic: "https://avatars.githubusercontent.com/u/113932706?v=4",
         username: "John Doe",
         timestamp: new Date(Date.now()),
@@ -12,6 +13,7 @@ export const mockVotings = [
     },
     {
         id: randomUUID(),
+        voting_id: randomUUID(),
         userPic: "https://avatars.githubusercontent.com/u/113932706?v=4",
         username: "John Doe",
         timestamp: new Date(Date.now() - 60 * 60 * 1000),
@@ -21,6 +23,7 @@ export const mockVotings = [
     },
     {
         id: randomUUID(),
+        voting_id: randomUUID(),
         userPic: "https://avatars.githubusercontent.com/u/113932706?v=4",
         username: "John Doe",
         timestamp: new Date(Date.now() - 60 * 60 * 123000),
