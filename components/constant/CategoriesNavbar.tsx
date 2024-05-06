@@ -10,8 +10,8 @@ import clsx from "clsx";
  * @returns
  */
 export default function CategoriesNavbar({ userId }: { userId: string }): JSX.Element {
-    // todo: fix bc i get undefined
     const { path }: { path: string } = useParams();
+    // todo: add this to DB
     const categories: string[] = [
         "All",
         "Trending",
@@ -25,7 +25,6 @@ export default function CategoriesNavbar({ userId }: { userId: string }): JSX.El
         "Books",
         "Sports",
     ];
-    console.log("nav " + path);
 
     return (
         <div className="w-full overflow-x-auto">

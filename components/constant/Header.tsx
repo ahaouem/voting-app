@@ -7,9 +7,9 @@ import Link from "next/link";
 import CategoriesNavbar from "./CategoriesNavbar";
 import { useParams } from "next/navigation";
 
-export default function Header({ userId }: { userId: string }) {
-    const { category } = useParams();
-    console.log("nav " + category);
+export default function Header({ userId }: { userId: string }): JSX.Element {
+    // filter in DB votings w/ { category }
+    const { category }: { category: string } = useParams();
 
     return (
         <section className="p-7 flex flex-col items-center justify-between w-screen bg-black">
@@ -31,7 +31,6 @@ export default function Header({ userId }: { userId: string }) {
                 </section>
             </header>
             <CategoriesNavbar userId={userId} />
-            {category && <h2 className="text-white text-2xl">{category}</h2>}
         </section>
     );
 }
