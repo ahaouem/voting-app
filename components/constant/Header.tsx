@@ -15,7 +15,9 @@ export default function Header({ userId }: { userId: string }): JSX.Element {
         <section className="p-7 flex flex-col items-center justify-between w-screen bg-black">
             <header className="w-full flex items-center justify-between pb-3">
                 {/* Logo */}
-                <h1 className="text-3xl font-bold text-white">Cloak</h1>
+                <Link href={"/"} className="text-3xl font-bold text-white">
+                    Cloak
+                </Link>
                 <section className="flex items-center justify-end gap-x-2">
                     <Link
                         href={"/notifications"}

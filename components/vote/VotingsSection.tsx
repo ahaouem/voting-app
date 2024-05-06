@@ -1,5 +1,6 @@
 import { mockVotings } from "@/lib/mocks";
 import Voting from "./Voting";
+import CreateVotingButton from "../constant/CreateVotingButton";
 
 export default function VotingsSection() {
     return (
@@ -17,6 +18,7 @@ export default function VotingsSection() {
                     options={voting.options}
                 />
             ))}
+            <CreateVotingButton />
         </div>
     );
 }

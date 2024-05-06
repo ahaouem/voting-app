@@ -9,6 +9,7 @@ export default function Page() {
     return (
         <div>
             <Header userId={"5c27d415-651b-41ae-96dd-ac44a7072345"} />
+            {category}
         </div>
     );
 }

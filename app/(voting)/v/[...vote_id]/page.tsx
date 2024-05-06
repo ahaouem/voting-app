@@ -5,6 +5,7 @@ import Header from "../../../../components/constant/Header";
 
 export default function Page(): JSX.Element {
     // todo: fethc from DB by VID (voting id)
+    //! not working getting: undefined
     const { vid }: { vid: string } = useParams();
     console.log("voting_id " + vid);
 
