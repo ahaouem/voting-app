@@ -1,20 +1,16 @@
 "use client";
 
-import Link from "next/link";
-import CategoriesNavbar from "./CategoriesNavbar";
-import { Bell } from "lucide-react";
 import { UserButton } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
+import { Bell } from "lucide-react";
+import Link from "next/link";
+import CategoriesNavbar from "./CategoriesNavbar";
 import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
 
 export default function Header({ userId }: { userId: string }) {
-    const [selectedCategory, setSelectedCategory] = useState<string>("All");
-    const { params }: { params: string } = useParams();
+    const { category } = useParams();
+    console.log("nav " + category);
 
-    useEffect(() => {
-        setSelectedCategory(params);
-    }, [params]);
     return (
         <section className="p-7 flex flex-col items-center justify-between w-screen bg-black">
             <header className="w-full flex items-center justify-between pb-3">
@@ -35,6 +31,7 @@ export default function Header({ userId }: { userId: string }) {
                 </section>
             </header>
             <CategoriesNavbar userId={userId} />
+            {category && <h2 className="text-white text-2xl">{category}</h2>}
         </section>
     );
 }

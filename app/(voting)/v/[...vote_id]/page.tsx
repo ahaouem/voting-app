@@ -1,7 +1,7 @@
 "use client";
 
-import { Header } from "@/components";
 import { useParams } from "next/navigation";
+import Header from "../../../../components/constant/Header";
 
 export default function Page(): JSX.Element {
     const { vid }: { vid: string } = useParams();
@@ -10,7 +10,7 @@ export default function Page(): JSX.Element {
         <>
             {/* fetch from voting id */}
             <Header userId={"5c27d415-651b-41ae-96dd-ac44a7072345"} />
-            <main>{vid}</main>
+            <main className="text-red-500 text-4xl">{vid}</main>
         </>
     );
 }
