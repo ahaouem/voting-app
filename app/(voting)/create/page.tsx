@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/Button";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/Select";
 import { IVotingInputs } from "@/types";
 import { FormEvent, KeyboardEvent, useState } from "react";
+import { Label } from "@/components/ui/Label";
 
 export default function Page(): JSX.Element {
     const [title, setTitle] = useState<string>("");
@@ -17,17 +18,16 @@ export default function Page(): JSX.Element {
     const [allowList, setAllowList] = useState<string[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
     const [selectedUser, setSelectedUser] = useState<string>("");
-
+    const selectOptions = { options: ["Public", "Private"], placeholder: "Visibility", id: "visibility" };
     const inputs: IVotingInputs[] = [
-        { type: "text", name: "title", placeholder: "Title" },
-        { type: "text", name: "description", placeholder: "Description" },
-        { type: "url", name: "img", placeholder: "Image" },
-        { type: "time", name: "endtime", placeholder: "End Time" },
+        { type: "text", name: "title", placeholder: "Title", id: "title" },
+        { type: "text", name: "description", placeholder: "Description", id: "description" },
+        { type: "url", name: "img", placeholder: "Image", id: "img" },
+        { type: "time", name: "endtime", placeholder: "End Time", id: "endtime" },
     ];
-    const selectOptions = { options: ["Public", "Private"], placeholder: "Visibility" };
     const optionsInputs: IVotingInputs[] = [
-        { type: "text", name: "option1", placeholder: "First Option" },
-        { type: "text", name: "option2", placeholder: "Second Options" },
+        { type: "text", name: "option1", placeholder: "First Option", id: "option1" },
+        { type: "text", name: "option2", placeholder: "Second Options", id: "option2" },
     ];
 
     const handleSubmit = async () => {
@@ -42,30 +42,36 @@ export default function Page(): JSX.Element {
     };
 
     return (
-        <main className="p-5 flex flex-col items-start justify-start gap-y-3">
+        <main className="p-5 flex flex-col items-start justify-start gap-y-3 bg-black h-screen w-screen">
+            <h1 className="text-white text-4xl font-bold pb-2">Create your own voting</h1>
             {inputs.map((input: IVotingInputs) => (
-                <Input
-                    key={input.name}
-                    {...input}
-                    className="font-semibold"
-                    onChange={(e: FormEvent<HTMLInputElement>) => {
-                        switch (input.name) {
-                            case "title":
-                                setTitle(e.currentTarget.value);
-                                break;
-                            case "description":
-                                setDescription(e.currentTarget.value);
-                                break;
-                            case "img":
-                                setImg(e.currentTarget.value);
-                                break;
-                            case "endtime":
-                                setEndtime(e.currentTarget.value);
-                                break;
-                        }
-                    }}
-                />
+                <div key={input.id} className="text-white">
+                    <label htmlFor={input.id}>{input.placeholder}</label>
+                    <Input
+                        {...input}
+                        className="font-semibold text-white"
+                        onChange={(e: FormEvent<HTMLInputElement>) => {
+                            switch (input.name) {
+                                case "title":
+                                    setTitle(e.currentTarget.value);
+                                    break;
+                                case "description":
+                                    setDescription(e.currentTarget.value);
+                                    break;
+                                case "img":
+                                    setImg(e.currentTarget.value);
+                                    break;
+                                case "endtime":
+                                    setEndtime(e.currentTarget.value);
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }}
+                    />
+                </div>
             ))}
+
             <section>
                 <Select>
                     <SelectTrigger className="w-full">
