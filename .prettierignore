@@ -1,0 +1,4 @@
+.next/
+contracts/
+node_modules/
+pnpm-lock.yaml
