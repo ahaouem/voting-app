@@ -5,11 +5,12 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { Button } from "@/components/ui/Button";
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/Form";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/Form";
 import { Input } from "@/components/ui/Input";
-import { useState } from "react";
 import { Textarea } from "@/components/ui/Textarea";
 import { AnimatedTooltip } from "@/components/ui/animated-tooltip";
+import { FormSchema } from "@/lib/validators/create";
+import { useState } from "react";
 
 type TooltipUsers = {
     id: number;
@@ -17,40 +18,10 @@ type TooltipUsers = {
     image: string;
 };
 
-const FormSchema = z.object({
-    // todo: change for production
-    v_title: z.string().min(2, {
-        message: "Voting title must be at least 10 characters.",
-    }),
-    v_desc: z.string().min(2, {
-        message: "Voting description must be at least 20 characters.",
-    }),
-    v_endtime: z.string().date(),
-    v_option1: z.string().min(2, {
-        message: "Option must be at least 2 characters.",
-    }),
-    v_option2: z.string().min(2, {
-        message: "Option must be at least 2 characters.",
-    }),
-    allowed_users: z.array(
-        z.object({
-            id: z.number(),
-            name: z.string().min(2, {
-                message: "Username must be at least 2 characters.",
-            }),
-            image: z.string().url().min(2, {
-                message: "Image url must be at least 2 characters.",
-            }),
-        }),
-    ),
-    is_private: z.boolean(),
-});
-
 export default function Page(): JSX.Element {
     const [loading, setLoading] = useState<boolean>(false);
     const [allowedUsers, setAllowedUsers] = useState<TooltipUsers[]>([]);
     const [inputValue, setInputValue] = useState<string>("");
-    const [isPrivate, setIsPrivate] = useState<boolean>(false);
 
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
@@ -77,7 +48,7 @@ export default function Page(): JSX.Element {
         if (event.key === " " || event.key === "Enter") {
             event.preventDefault();
 
-            // add trycatch with loading from api
+            // todo: add trycatch with loading from api
             const exampleData = {
                 id: allowedUsers.length + 1,
                 name: inputValue.trim(),
