@@ -15,16 +15,22 @@ export const FormSchema = z.object({
     v_option2: z.string().min(2, {
         message: "Option must be at least 2 characters.",
     }),
-    allowed_users: z.array(
-        z.object({
-            id: z.number(),
-            name: z.string().min(2, {
-                message: "Username must be at least 2 characters.",
+    allowed_users: z
+        .array(
+            z.object({
+                id: z.number(),
+                name: z.string().min(2, {
+                    message: "Username must be at least 2 characters.",
+                }),
+                image: z.string().url().min(2, {
+                    message: "Image url must be at least 2 characters.",
+                }),
             }),
-            image: z.string().url().min(2, {
-                message: "Image url must be at least 2 characters.",
-            }),
-        }),
-    ),
+        )
+        .optional(),
+    category: z.string().min(2, {
+        message: "Category must be chosen.",
+    }),
     is_private: z.boolean(),
+    v_img: z.string().optional(),
 });

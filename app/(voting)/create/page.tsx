@@ -11,6 +11,7 @@ import { Textarea } from "@/components/ui/Textarea";
 import { AnimatedTooltip } from "@/components/ui/animated-tooltip";
 import { FormSchema } from "@/lib/validators/create";
 import { useState } from "react";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/Select";
 
 type TooltipUsers = {
     id: number;
@@ -33,6 +34,8 @@ export default function Page(): JSX.Element {
             v_option2: "",
             allowed_users: [],
             is_private: false,
+            category: "",
+            v_img: "",
         },
     });
 
@@ -48,7 +51,7 @@ export default function Page(): JSX.Element {
         if (event.key === " " || event.key === "Enter") {
             event.preventDefault();
 
-            // todo: add trycatch with loading from api
+            // todo: add trycatch with loading from api to get user data
             const exampleData = {
                 id: allowedUsers.length + 1,
                 name: inputValue.trim(),
@@ -98,6 +101,7 @@ export default function Page(): JSX.Element {
                                     <Textarea
                                         autoComplete="off"
                                         autoCorrect="off"
+                                        rows={5}
                                         placeholder="Description"
                                         {...field}
                                     />
@@ -108,17 +112,58 @@ export default function Page(): JSX.Element {
                     />
                     <FormField
                         control={form.control}
-                        name="v_endtime"
+                        name="v_img"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>End time</FormLabel>
+                                <FormLabel>
+                                    Image <span className="text-xs">(optional)</span>
+                                </FormLabel>
                                 <FormControl>
-                                    <Input type="date" {...field} />
+                                    <Input
+                                        type="text"
+                                        {...field}
+                                        placeholder="https://avatars.githubusercontent.com/u/1"
+                                    />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
                         )}
                     />
+                    <section className="grid grid-cols-3 gap-x-5">
+                        {/* todo: select component */}
+                        <FormField
+                            control={form.control}
+                            name="category"
+                            render={({ field }) => (
+                                <FormItem className="col-span-2">
+                                    <FormLabel>Category</FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            autoComplete="off"
+                                            autoCorrect="off"
+                                            type="text"
+                                            placeholder="Technology"
+                                            {...field}
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="v_endtime"
+                            render={({ field }) => (
+                                <FormItem className="col-span-1">
+                                    <FormLabel>End time</FormLabel>
+                                    <FormControl>
+                                        <Input type="date" {...field} />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                    </section>
                     <section className="flex flex-col items-start justify-between w-full gap-y-2 pt-5">
                         <p className="text-lg font-semibold">
                             Choose your <span className="text-emerald-400">options</span> to vote
@@ -162,7 +207,6 @@ export default function Page(): JSX.Element {
                             />
                         </div>
                     </section>
-
                     <section className="pt-5 pb-20">
                         <p className="text-lg font-semibold pb-2">
                             In this section you can decide who can <span className="text-emerald-400">vote</span> by
