@@ -1,4 +1,4 @@
-//? fix this file imports, original: https://github.com/scaffold-eth/scaffold-eth-2/blob/main/packages/nextjs/utils/scaffold-eth/decodeTxData.ts
+//? fix this file imports on 7:20, original: https://github.com/scaffold-eth/scaffold-eth-2/blob/main/packages/nextjs/utils/scaffold-eth/decodeTxData.ts
 
 import { TransactionWithFunction } from "./block";
 import { GenericContractsDeclaration } from "./contract";

@@ -38,9 +38,6 @@ dependencies:
   '@radix-ui/react-toast':
     specifier: ^1.1.5
     version: 1.1.5(@types/react-dom@18.2.24)(@types/react@18.2.75)(react-dom@18.2.0)(react@18.2.0)
-  '@tanstack/react-query':
-    specifier: ^5.32.0
-    version: 5.32.0(react@18.2.0)
   class-variance-authority:
     specifier: ^0.7.0
     version: 0.7.0
@@ -56,6 +53,9 @@ dependencies:
   next:
     specifier: 14.1.4
     version: 14.1.4(@babel/core@7.24.4)(react-dom@18.2.0)(react@18.2.0)
+  next-themes:
+    specifier: ^0.3.0
+    version: 0.3.0(react-dom@18.2.0)(react@18.2.0)
   react:
     specifier: ^18
     version: 18.2.0
@@ -91,6 +91,9 @@ devDependencies:
   '@sentry/nextjs':
     specifier: ^7.112.1
     version: 7.112.1(next@14.1.4)(react@18.2.0)
+  '@tanstack/react-query':
+    specifier: ^5.32.0
+    version: 5.32.0(react@18.2.0)
   '@types/node':
     specifier: ^20
     version: 20.12.6
@@ -112,6 +115,9 @@ devDependencies:
   '@uniswap/v2-sdk':
     specifier: ^4.3.2
     version: 4.3.2
+  '@wagmi/core':
+    specifier: ^2.9.5
+    version: 2.9.5(@types/react@18.2.75)(react@18.2.0)(typescript@5.4.4)(viem@2.9.28)(zod@3.23.3)
   abitype:
     specifier: ^1.0.2
     version: 1.0.2(typescript@5.4.4)(zod@3.23.3)
@@ -172,6 +178,9 @@ devDependencies:
   uniswap:
     specifier: ^0.0.1
     version: 0.0.1(typescript@5.4.4)
+  usehooks-ts:
+    specifier: ^3.1.0
+    version: 3.1.0(react@18.2.0)
   viem:
     specifier: ~2.9.28
     version: 2.9.28(typescript@5.4.4)(zod@3.23.3)
@@ -181,6 +190,9 @@ devDependencies:
   zod:
     specifier: ^3.23.3
     version: 3.23.3
+  zustand:
+    specifier: ^4.5.2
+    version: 4.5.2(@types/react@18.2.75)(react@18.2.0)
 
 packages:
 
@@ -4652,6 +4664,7 @@ packages:
 
   /@tanstack/query-core@5.32.0:
     resolution: {integrity: sha512-Z3flEgCat55DRXU5UMwYU1U+DgFZKA3iufyOKs+II7iRAo0uXkeU7PH5e6sOH1CGEag0IpKmZxlUFpCg6roSKw==}
+    dev: true
 
   /@tanstack/react-query@5.32.0(react@18.2.0):
     resolution: {integrity: sha512-+E3UudQtarnx9A6xhpgMZapyF+aJfNBGFMgI459FnduEZqT/9KhOWnMOneZahLRt52yzskSA0AuOyLkXHK0yBA==}
@@ -4660,6 +4673,7 @@ packages:
     dependencies:
       '@tanstack/query-core': 5.32.0
       react: 18.2.0
+    dev: true
 
   /@types/bn.js@4.11.6:
     resolution: {integrity: sha512-pqr857jrp2kPuO9uRjZ3PwnJTjoQy+fcdxvBTvHm6dkmEL9q+hDD/2j/0ELOBPtPnS8LjCX0gI9nbl8lVkadpg==}
@@ -5135,6 +5149,32 @@ packages:
 
   /@wagmi/core@2.7.0(@types/react@18.2.75)(react@18.2.0)(typescript@5.4.4)(viem@2.9.28)(zod@3.23.3):
     resolution: {integrity: sha512-uhr9Wu59f7HwcV87KVvjDOYHiPUZFslw2a43ocuULdhjwu3MpwOlpNdUZ00TJ0h3oIg19+k9yQHP/KDg0sTIhw==}
+    peerDependencies:
+      '@tanstack/query-core': '>=5.0.0'
+      typescript: '>=5.0.4'
+      viem: 2.x
+    peerDependenciesMeta:
+      '@tanstack/query-core':
+        optional: true
+      typescript:
+        optional: true
+    dependencies:
+      eventemitter3: 5.0.1
+      mipd: 0.0.5(typescript@5.4.4)(zod@3.23.3)
+      typescript: 5.4.4
+      viem: 2.9.28(typescript@5.4.4)(zod@3.23.3)
+      zustand: 4.4.1(@types/react@18.2.75)(react@18.2.0)
+    transitivePeerDependencies:
+      - '@types/react'
+      - bufferutil
+      - immer
+      - react
+      - utf-8-validate
+      - zod
+    dev: true
+
+  /@wagmi/core@2.9.5(@types/react@18.2.75)(react@18.2.0)(typescript@5.4.4)(viem@2.9.28)(zod@3.23.3):
+    resolution: {integrity: sha512-gDaJ3Gis0z72N5Wjwh8hcDKXBKH3yWWrCdIIWvpL7kQO8FbcKVvWrB00z9zJo11LFAaI04eCikhx/LxM8xEY2A==}
     peerDependencies:
       '@tanstack/query-core': '>=5.0.0'
       typescript: '>=5.0.4'
@@ -10040,6 +10080,16 @@ packages:
       - supports-color
     dev: true
 
+  /next-themes@0.3.0(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-/QHIrsYpd6Kfk7xakK4svpDI5mmXP0gfvCoJdGpZQ2TOrQZmsW0QxjaiLn8wbIKjtm4BTSqLoix4lxYYOnLJ/w==}
+    peerDependencies:
+      react: ^16.8 || ^17 || ^18
+      react-dom: ^16.8 || ^17 || ^18
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    dev: false
+
   /next@14.1.4(@babel/core@7.24.4)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-1WTaXeSrUwlz/XcnhGTY7+8eiaFvdet5z9u3V2jb+Ek1vFo0VhHKSAIJvDWfQpttWjnyw14kBeq28TPq7bTeEQ==}
     engines: {node: '>=18.17.0'}
@@ -12530,6 +12580,16 @@ packages:
     dependencies:
       react: 18.2.0
 
+  /usehooks-ts@3.1.0(react@18.2.0):
+    resolution: {integrity: sha512-bBIa7yUyPhE1BCc0GmR96VU/15l/9gP1Ch5mYdLcFBaFGQsdmXkvjV0TtOqW1yUd6VjIwDunm+flSciCQXujiw==}
+    engines: {node: '>=16.15.0'}
+    peerDependencies:
+      react: ^16.8.0  || ^17 || ^18
+    dependencies:
+      lodash.debounce: 4.0.8
+      react: 18.2.0
+    dev: true
+
   /utf-8-validate@6.0.3:
     resolution: {integrity: sha512-uIuGf9TWQ/y+0Lp+KGZCMuJWc3N9BHA+l/UmHd/oUHwJJDeysyTRxNQVkbzsIWfGFbRe3OcgML/i0mvVRPOyDA==}
     engines: {node: '>=6.14.2'}
@@ -13043,6 +13103,26 @@ packages:
     peerDependencies:
       '@types/react': '>=16.8'
       immer: '>=9.0'
+      react: '>=16.8'
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      immer:
+        optional: true
+      react:
+        optional: true
+    dependencies:
+      '@types/react': 18.2.75
+      react: 18.2.0
+      use-sync-external-store: 1.2.0(react@18.2.0)
+    dev: true
+
+  /zustand@4.5.2(@types/react@18.2.75)(react@18.2.0):
+    resolution: {integrity: sha512-2cN1tPkDVkwCy5ickKrI7vijSjPksFRfqS6237NzT0vqSsztTNnQdHw9mmN7uBdk3gceVXU0a+21jFzFzAc9+g==}
+    engines: {node: '>=12.7.0'}
+    peerDependencies:
+      '@types/react': '>=16.8'
+      immer: '>=9.0.6'
       react: '>=16.8'
     peerDependenciesMeta:
       '@types/react':
