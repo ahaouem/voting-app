@@ -1,5 +1,5 @@
-import externalContracts from "./externalContracts";
-import deployedContracts from "./deployedContracts";
 import { VOTING_ABI } from "./ABI";
 
-export { externalContracts, deployedContracts, VOTING_ABI };
+const VOTING_ADDRESS = "0x90d7a25EB38e5481727F5D97d5E23cd2e2326D12";
+
+export { VOTING_ABI, VOTING_ADDRESS };
