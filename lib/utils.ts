@@ -55,3 +55,10 @@ export function formatTimeToNow(date: Date): string {
         },
     });
 }
+
+export function daysLeft(deadline: any): string {
+    const difference: number = new Date(deadline).getTime() - Date.now();
+    const remainingDays: number = difference / (1000 * 3600 * 24);
+
+    return remainingDays.toFixed(0);
+}

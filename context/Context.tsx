@@ -5,7 +5,17 @@ import { ethers } from "ethers";
 import { EditionMetadataWithOwnerOutputSchema } from "@thirdweb-dev/sdk";
 import { VOTING_ADDRESS } from "@/contracts";
 
-const Context = createContext({});
+const StateContext = createContext({
+    // address: "",
+    // contract: null as ethers.Contract | null,
+    connect: () => {},
+    createPoll: async ({ form }: { form: any }) => {},
+    vote: async ({ pollId, choice }: { pollId: number; choice: number }) => {},
+    getOwner: async (pollId: number) => {},
+    getAllVoteCount: async (pollId: number) => {},
+    getChoiceCount: async (pollId: number, choice: number) => {},
+    getChoiceVotersAddresses: async (pollId: number, choice: number) => {},
+});
 
 export const StateContextProvider = ({ children }: { children: any }) => {
     const { contract } = useContract(VOTING_ADDRESS);
@@ -90,10 +100,8 @@ export const StateContextProvider = ({ children }: { children: any }) => {
     };
 
     return (
-        <Context.Provider
+        <StateContext.Provider
             value={{
-                address,
-                contract,
                 connect,
                 createPoll,
                 vote,
@@ -104,8 +112,8 @@ export const StateContextProvider = ({ children }: { children: any }) => {
             }}
         >
             {children}
-        </Context.Provider>
+        </StateContext.Provider>
     );
 };
 
-export const useStateContext = () => useContext(Context);
+export const useStateContext = () => useContext(StateContext);
