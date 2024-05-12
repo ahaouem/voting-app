@@ -1,14 +1,16 @@
+"use client";
+
 import React, { useContext, createContext } from "react";
 
 import { useAddress, useContract, useMetamask, useContractWrite } from "@thirdweb-dev/react";
 import { ethers } from "ethers";
-import { EditionMetadataWithOwnerOutputSchema } from "@thirdweb-dev/sdk";
+// import { EditionMetadataWithOwnerOutputSchema } from "@thirdweb-dev/sdk";
 import { VOTING_ADDRESS } from "@/contracts";
 
 const StateContext = createContext({
     // address: "",
     // contract: null as ethers.Contract | null,
-    connect: () => {},
+    // connect: () => {},
     createPoll: async ({ form }: { form: any }) => {},
     vote: async ({ pollId, choice }: { pollId: number; choice: number }) => {},
     getOwner: async (pollId: number) => {},
@@ -21,8 +23,9 @@ export const StateContextProvider = ({ children }: { children: any }) => {
     const { contract } = useContract(VOTING_ADDRESS);
     const { mutateAsync: create } = useContractWrite(contract, "createPoll");
 
-    const address = useAddress();
-    const connect = useMetamask();
+    // const address = useAddress();
+    const address = "0x0858af1619831E174d1C98C7A33dBc212EE171dD";
+    // const connect = useMetamask();
 
     const createPoll = async ({ form }: { form: any }) => {
         try {
@@ -102,7 +105,7 @@ export const StateContextProvider = ({ children }: { children: any }) => {
     return (
         <StateContext.Provider
             value={{
-                connect,
+                // connect,
                 createPoll,
                 vote,
                 getOwner,

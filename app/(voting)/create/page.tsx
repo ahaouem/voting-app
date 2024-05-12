@@ -11,8 +11,8 @@ import { Textarea } from "@/components/ui/Textarea";
 import { AnimatedTooltip } from "@/components/ui/animated-tooltip";
 import { FormSchema } from "@/lib/validators/create";
 import { useState } from "react";
-import { ethers } from "ethers";
-import { useStateContext } from "@/context/Context";
+// import { ethers } from "ethers";
+// import { useStateContext } from "@/context/Context";
 
 type TooltipUsers = {
     id: number;
@@ -24,7 +24,7 @@ export default function Page(): JSX.Element {
     const [loading, setLoading] = useState<boolean>(false);
     const [allowedUsers, setAllowedUsers] = useState<TooltipUsers[]>([]);
     const [inputValue, setInputValue] = useState<string>("");
-    const { createPoll } = useStateContext();
+    // const { createPoll } = useStateContext();
 
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
@@ -49,8 +49,8 @@ export default function Page(): JSX.Element {
                 data.allowed_users = allowedUsers;
             }
 
-            await createPoll({ form: data });
-            // redirect to poll page: /v/[...pid]
+            // await createPoll({ form: data });
+            // redirect to poll page: /v/[...vid]
         } catch (error) {
             console.error(error);
             // add toast

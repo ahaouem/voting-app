@@ -7,7 +7,7 @@ export default function VotingsSection() {
         <div className="p-5 flex flex-col items-start justify-start gap-y-5 w-screen h-full">
             {mockVotings.map((voting) => (
                 <Voting
-                    key={voting.title}
+                    key={voting.voting_id}
                     user_id={voting.id}
                     voting_id={voting.voting_id}
                     userPic={voting.userPic}
