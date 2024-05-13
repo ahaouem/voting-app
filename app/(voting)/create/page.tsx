@@ -11,7 +11,8 @@ import { Textarea } from "@/components/ui/Textarea";
 import { AnimatedTooltip } from "@/components/ui/animated-tooltip";
 import { FormSchema } from "@/lib/validators/create";
 import { useState } from "react";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/Select";
+// import { ethers } from "ethers";
+// import { useStateContext } from "@/context/Context";
 
 type TooltipUsers = {
     id: number;
@@ -23,6 +24,7 @@ export default function Page(): JSX.Element {
     const [loading, setLoading] = useState<boolean>(false);
     const [allowedUsers, setAllowedUsers] = useState<TooltipUsers[]>([]);
     const [inputValue, setInputValue] = useState<string>("");
+    // const { createPoll } = useStateContext();
 
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
@@ -39,12 +41,22 @@ export default function Page(): JSX.Element {
         },
     });
 
-    function onSubmit(data: z.infer<typeof FormSchema>) {
-        if (allowedUsers.length > 0) {
-            data.is_private = true;
-            data.allowed_users = allowedUsers;
+    async function onSubmit(data: z.infer<typeof FormSchema>) {
+        try {
+            setLoading(true);
+            if (allowedUsers.length > 0) {
+                data.is_private = true;
+                data.allowed_users = allowedUsers;
+            }
+
+            // await createPoll({ form: data });
+            // redirect to poll page: /v/[...vid]
+        } catch (error) {
+            console.error(error);
+            // add toast
+        } finally {
+            setLoading(false);
         }
-        console.log(data);
     }
 
     function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>): void {
