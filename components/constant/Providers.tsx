@@ -14,8 +14,9 @@ export default function Providers({ children }: Readonly<{ children: React.React
     return (
         <QueryClientProvider client={queryClient}>
             <ThirdwebProvider
-                supportedChains={[Ethereum, OpSepoliaTestnet, Sepolia]}
+                supportedChains={[OpSepoliaTestnet, Sepolia]}
                 clientId={process.env.THIRDWEB_CLIENT_ID}
+                activeChain={OpSepoliaTestnet}
             >
                 <ClerkProvider appearance={{ baseTheme: dark }}>
                     <StateContextProvider>{children}</StateContextProvider>

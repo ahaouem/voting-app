@@ -20,7 +20,7 @@ const StateContext = createContext({
 });
 
 export const StateContextProvider = ({ children }: { children: any }) => {
-    const { contract } = useContract(VOTING_ADDRESS);
+    const { contract, isLoading, error, fetchStatus } = useContract(VOTING_ADDRESS);
     const { mutateAsync: create } = useContractWrite(contract, "createPoll");
 
     // const address = useAddress();
