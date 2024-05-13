@@ -13,13 +13,14 @@ export default function Providers({ children }: Readonly<{ children: React.React
     // fix: idk why when i uncomment this providers the app wont load
     return (
         <QueryClientProvider client={queryClient}>
-            {/* <ThirdwebProvider supportedChains={[Ethereum, OpSepoliaTestnet, Sepolia]}> */}
-            <ClerkProvider appearance={{ baseTheme: dark }}>
-                {/* <StateContextProvider> */}
-                {children}
-                {/* </StateContextProvider> */}
-            </ClerkProvider>
-            {/* </ThirdwebProvider> */}
+            <ThirdwebProvider
+                supportedChains={[Ethereum, OpSepoliaTestnet, Sepolia]}
+                clientId={process.env.THIRDWEB_CLIENT_ID}
+            >
+                <ClerkProvider appearance={{ baseTheme: dark }}>
+                    <StateContextProvider>{children}</StateContextProvider>
+                </ClerkProvider>
+            </ThirdwebProvider>
         </QueryClientProvider>
     );
 }
