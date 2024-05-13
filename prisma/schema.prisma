@@ -14,13 +14,59 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum category {
+  CRYPTO
+  SCIENCE
+  TECHNOLOGY
+  PROGRMMING
+  MUSIC
+  MOVIES 
+  GAMING
+  BOOKS
+  SPORTS
+}
+
 model User {
-  id       String   @id @default(cuid())
-  clerkId  String   @unique
-  
-  
+  id            String   @id @default(cuid())
+  address       String
+  clerkId       String   @unique
+  profilePicture String  
+  createdAt     DateTime @default(now())
+  votes         Vote[]   @relation("UserToVote")
 }
 
 
+model Poll {
+  id          String   @id @default(cuid())
+  authorId    String
+  title       String
+  description String
+  image      String
+  category    category
+  options     Option[]
+  votes       Vote[]
+  isPrivatet Boolean
+  startTime   DateTime
+  endTime     DateTime
+  createdAt   DateTime @default(now())
+}
 
-//TODO: Votings, Votes and maybe more, so I need time to think, so I will come back to this later
+model Vote {
+  id          String   @id @default(cuid())
+  user        User     @relation("UserToVote", fields: [userId], references: [id])
+  userId      String
+  option      Option   @relation(fields: [optionId], references: [id])
+  optionId    String
+  pollId      String
+  poll        Poll     @relation(fields: [pollId], references: [id]) 
+  createdAt   DateTime @default(now())
+}
+
+model Option {
+  id          String   @id @default(cuid())
+  title       String
+  desc       String
+  votes       Vote[]
+  poll        Poll     @relation(fields: [pollId], references: [id])
+  pollId      String
+} 
