@@ -6,13 +6,24 @@ export interface IVotingInputs {
 }
 
 export interface IVoting {
-    owner: string;
+    creator: string;
+    choices: string[];
+    startTime: Date;
+    user_id: string;
+    voting_id: string;
+    userPic: string;
+    username: string;
+    category: string;
+    timestamp: Date;
     title: string;
     description: string;
     image: string;
-    category: string;
-    choices: string[];
-    endTime: number;
     isPrivate: boolean;
     allowedVoters: string[] | null;
+}
+
+export interface IVoter {
+    address: string;
+    voted: boolean;
+    option: string;
 }

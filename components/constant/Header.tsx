@@ -7,7 +7,7 @@ import Link from "next/link";
 import CategoriesNavbar from "./CategoriesNavbar";
 import { useParams } from "next/navigation";
 
-export default function Header({ userId }: { userId: string }): JSX.Element {
+export default function Header({ userId }: { userId: string | null | undefined }): JSX.Element {
     // filter in DB votings w/ { category }
     const { category }: { category: string } = useParams();
 

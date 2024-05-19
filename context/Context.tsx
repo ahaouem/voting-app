@@ -15,7 +15,7 @@ const StateContext = createContext({
     createPoll: async ({ form }: { form: any }) => {},
     vote: async ({ pollId, choice }: { pollId: number; choice: number }) => {},
     getPoll: async (pollId: number) => {},
-    getAllPolls: async (): Promise<IVoting[] | undefined> => {},
+    getAllPolls: async () => {},
     getOwner: async (pollId: number) => {},
     getAllVoteCount: async (pollId: number) => {},
     getChoiceCount: async (pollId: number, choice: number) => {},
@@ -32,7 +32,7 @@ export const StateContextProvider = ({ children }: { children: any }): JSX.Eleme
 
     const publishPoll = async ({ form }: { form: any }) => {
         try {
-            const data = await createPoll({
+            return await createPoll({
                 args: [
                     address, // msg.sender
                     form.title, // string
@@ -45,24 +45,20 @@ export const StateContextProvider = ({ children }: { children: any }): JSX.Eleme
                     form.allowedVoters, // address[]
                 ],
             });
-
-            console.log(data);
         } catch (error) {
             console.error(error);
         }
     };
 
-    const getPoll = async (pollId: number) => {
+    const getPoll = async (pollId: string) => {
         try {
-            const data = await contract?.call("getPoll", [pollId]);
-
-            console.log(data);
+            return await contract?.call("getPoll", [pollId]);
         } catch (error) {
             console.error(error);
         }
     };
 
-    const getAllPolls = async (): Promise<IVoting[] | undefined> => {
+    const getAllPolls = async () => {
         try {
             return await contract?.call("getAllPolls");
         } catch (error) {
@@ -70,54 +66,44 @@ export const StateContextProvider = ({ children }: { children: any }): JSX.Eleme
         }
     };
 
-    const vote = async ({ pollId, choice }: { pollId: number; choice: number }) => {
+    const vote = async ({ pollId, choice }: { pollId: string; choice: number }) => {
         try {
-            const data = await contract?.call("vote", [
+            return await contract?.call("vote", [
                 pollId, // uint256
                 choice, // uint256
             ]);
-
-            console.log("Vote successful", data);
         } catch (error) {
             console.error(error);
         }
     };
 
-    const getOwner = async (pollId: number) => {
+    const getOwner = async (pollId: string) => {
         try {
-            const data = await contract?.call("getOwner", [pollId]);
-
-            console.log(data);
+            return await contract?.call("getOwner", [pollId]);
         } catch (error) {
             console.error(error);
         }
     };
 
-    const getAllVoteCount = async (pollId: number) => {
+    const getAllVoteCount = async (pollId: string) => {
         try {
-            const data = await contract?.call("getAllVoteCount", [pollId]);
-
-            console.log(data);
+            return await contract?.call("getAllVoteCount", [pollId]);
         } catch (error) {
             console.error(error);
         }
     };
 
-    const getChoiceCount = async (pollId: number, choice: number) => {
+    const getChoiceCount = async (pollId: string, choice: number) => {
         try {
-            const data = await contract?.call("getChoiceCount", [pollId, choice]);
-
-            console.log(data);
+            return await contract?.call("getChoiceCount", [pollId, choice]);
         } catch (error) {
             console.error(error);
         }
     };
 
-    const getChoiceVotersAddresses = async (pollId: number, choice: number) => {
+    const getChoiceVotersAddresses = async (pollId: string, choice: number) => {
         try {
-            const data = await contract?.call("getChoiceVotersAddresses", [pollId, choice]);
-
-            console.log(data);
+            return await contract?.call("getChoiceVotersAddresses", [pollId, choice]);
         } catch (error) {
             console.error(error);
         }
@@ -126,7 +112,25 @@ export const StateContextProvider = ({ children }: { children: any }): JSX.Eleme
     return (
         <StateContext.Provider
             value={{
-                createPoll: publishPoll,
+                createPoll: async ({ form }: { form: any }) => {
+                    try {
+                        await createPoll({
+                            args: [
+                                address, // msg.sender
+                                form.title, // string
+                                form.description, // string
+                                form.image, // string
+                                form.category, // string
+                                form.choices, // string[2]
+                                form.endTime, // block.timestamp
+                                form.isPrivate, // bool
+                                form.allowedVoters, // address[]
+                            ],
+                        });
+                    } catch (error) {
+                        console.error(error);
+                    }
+                },
                 vote,
                 getPoll,
                 getAllPolls,

@@ -9,7 +9,7 @@ import clsx from "clsx";
  * @param user id to make suited categories
  * @returns
  */
-export default function CategoriesNavbar({ userId }: { userId: string }): JSX.Element {
+export default function CategoriesNavbar({ userId }: { userId: string | null | undefined }): JSX.Element {
     const { path }: { path: string } = useParams();
     // todo: add this to DB
     const categories: string[] = [
