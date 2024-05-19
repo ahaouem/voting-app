@@ -37,7 +37,7 @@ export default function VotingsSection() {
         user_id: voting.owner,
         voting_id: voting.title,
         userPic: voting.image,
-        username: voting.owner, 
+        username: voting.owner,
         timestamp: new Date(voting.endTime),
         title: voting.title,
         description: voting.description,
@@ -47,10 +47,7 @@ export default function VotingsSection() {
     return (
         <div className="p-5 flex flex-col items-start justify-start gap-y-5 w-screen h-full">
             {polls.map((voting: IVoting) => (
-                <Voting
-                    key={voting.owner + voting.title} 
-                    {...transformVotingData(voting)}
-                />
+                <Voting key={voting.owner + voting.title} {...transformVotingData(voting)} />
             ))}
             <CreateVotingButton />
         </div>

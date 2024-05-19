@@ -15,7 +15,9 @@ const StateContext = createContext({
     createPoll: async ({ form }: { form: any }) => {},
     vote: async ({ pollId, choice }: { pollId: number; choice: number }) => {},
     getPoll: async (pollId: number) => {},
-    getAllPolls: async (): Promise<IVoting[] | undefined> => {},
+    getAllPolls: async (): Promise<IVoting[] | undefined> => {
+        return Promise.resolve(undefined);
+    },
     getOwner: async (pollId: number) => {},
     getAllVoteCount: async (pollId: number) => {},
     getChoiceCount: async (pollId: number, choice: number) => {},
@@ -64,9 +66,11 @@ export const StateContextProvider = ({ children }: { children: any }): JSX.Eleme
 
     const getAllPolls = async (): Promise<IVoting[] | undefined> => {
         try {
-            return await contract?.call("getAllPolls");
+            const data = await contract?.call("getAllPolls");
+            return data;
         } catch (error) {
             console.error(error);
+            return undefined;
         }
     };
 
