@@ -13,13 +13,13 @@ const StateContext = createContext({
     // contract: null as ethers.Contract | null,
     // connect: () => {},
     createPoll: async ({ form }: { form: any }) => {},
-    vote: async ({ pollId, choice }: { pollId: number; choice: number }) => {},
-    getPoll: async (pollId: number) => {},
+    vote: async ({ pollId, choice }: { pollId: string; choice: number }) => {},
+    getPoll: async (pollId: string) => {},
     getAllPolls: async () => {},
-    getOwner: async (pollId: number) => {},
-    getAllVoteCount: async (pollId: number) => {},
-    getChoiceCount: async (pollId: number, choice: number) => {},
-    getChoiceVotersAddresses: async (pollId: number, choice: number) => {},
+    getOwner: async (pollId: string) => {},
+    getAllVoteCount: async (pollId: string) => {},
+    getChoiceCount: async (pollId: string, choice: number) => {},
+    getChoiceVotersAddresses: async (pollId: string, choice: number) => {},
 });
 
 export const StateContextProvider = ({ children }: { children: any }): JSX.Element => {
