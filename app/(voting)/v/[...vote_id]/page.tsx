@@ -27,7 +27,7 @@ export default function Page() {
     let { vote_id }: { vote_id: string } = useParams();
     vote_id = vote_id.toString();
     // getPoll(vote_id);
-    console.log(getPoll(vote_id))
+    console.log(getPoll(vote_id));
 
     const mockData: VotePageProps = {
         vote_id: "0x5A86858aA3b595FD6663c2296741eF4cd8BC4d01",
