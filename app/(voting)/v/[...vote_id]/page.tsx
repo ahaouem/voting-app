@@ -1,16 +1,13 @@
 "use client";
 import { Button } from "@/components/ui/Button";
+import { useStateContext } from "@/context/Context";
+import { calculateVoteCounts } from "@/lib/utils";
+import { IVoter } from "@/types";
 import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 
-interface IVoter {
-    address: string;
-    voted: boolean;
-    option: string;
-}
-
-interface VotePageProps {
+export interface VotePageProps {
     vote_id: string;
     title: string;
     description: string;
@@ -26,8 +23,12 @@ interface VotePageProps {
 }
 
 export default function Page() {
-    const { vote_id } = useParams();
-    // example: 0x5A86858aA3b595FD6663c2296741eF4cd8BC4d01
+    const { getPoll, getAllVoteCount, getChoiceCount, getChoiceVotersAddresses, getOwner } = useStateContext();
+    let { vote_id }: { vote_id: string } = useParams();
+    vote_id = vote_id.toString();
+    // getPoll(vote_id);
+    console.log(getPoll(vote_id));
+
     const mockData: VotePageProps = {
         vote_id: "0x5A86858aA3b595FD6663c2296741eF4cd8BC4d01",
         title: "Title",
@@ -60,18 +61,13 @@ export default function Page() {
         likes: 12321,
     };
 
-    const voteCounts: { [option: string]: number } = {};
-    mockData.options.forEach((option) => {
-        voteCounts[option] = mockData.voters.filter((voter: IVoter) => voter.option === option).length;
-    });
+    const voteCounts = calculateVoteCounts(mockData);
 
     return (
         <main className="w-screen h-screen p-5 bg-black">
             <div className="flex w-full pb-5 items-center gap-x-5">
                 <Button
-                    onClick={() => {
-                        window.history.back();
-                    }}
+                    onClick={() => window.history.back()}
                     className="bg-zinc-900 text-emerald-400 rounded-lg px-2 py-1 hover:underline"
                 >
                     <ChevronLeft />

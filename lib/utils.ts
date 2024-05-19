@@ -2,6 +2,8 @@ import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { formatDistanceToNowStrict } from "date-fns";
 import locale from "date-fns/locale/en-US";
+import { VotePageProps } from "@/app/(voting)/v/[...vote_id]/page";
+import { IVoter } from "@/types";
 
 export function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs));
@@ -61,4 +63,13 @@ export function daysLeft(deadline: any): string {
     const remainingDays: number = difference / (1000 * 3600 * 24);
 
     return remainingDays.toFixed(0);
+}
+
+export function calculateVoteCounts(data: VotePageProps): { [option: string]: number } {
+    const voteCounts: { [option: string]: number } = {};
+    data.options.forEach((option: string): void => {
+        voteCounts[option] = data.voters.filter((voter: IVoter) => voter.option === option).length;
+    });
+
+    return voteCounts;
 }
