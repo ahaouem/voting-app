@@ -21,6 +21,7 @@ const StateContext = createContext({
     getChoiceCount: async (pollId: string, choice: number) => {},
     getChoiceVotersAddresses: async (pollId: string, choice: number) => {},
 });
+// const StateContext = createContext({});
 
 export const StateContextProvider = ({ children }: { children: any }): JSX.Element => {
     const { contract, isLoading, error, fetchStatus } = useContract(VOTING_ADDRESS);
@@ -60,9 +61,11 @@ export const StateContextProvider = ({ children }: { children: any }): JSX.Eleme
 
     const getAllPolls = async () => {
         try {
-            return await contract?.call("getAllPolls");
+            const data = await contract?.call("getAllPolls");
+            return data;
         } catch (error) {
             console.error(error);
+            return undefined;
         }
     };
 

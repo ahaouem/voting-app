@@ -51,10 +51,9 @@ export default function Page(): JSX.Element {
 
             console.log("Creating poll...");
             await createPoll({ form: data });
-            console.log("Poll created");
             // redirect to poll page: /v/[...vid]
         } catch (error) {
-            console.error(error);
+            console.error("Error creating poll", error);
             // add toast
         } finally {
             setLoading(false);

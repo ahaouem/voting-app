@@ -1,11 +1,11 @@
 "use client";
 
-import { mockVotings } from "@/lib/mocks";
 import Voting from "./Voting";
 import CreateVotingButton from "../constant/CreateVotingButton";
 import { useStateContext } from "@/context/Context";
 import { useEffect, useState } from "react";
 import { IVoting } from "@/types";
+import { mockVotings } from "@/lib/mocks";
 
 export default function VotingsSection() {
     const [polls, setPolls] = useState<IVoting[]>([]);
