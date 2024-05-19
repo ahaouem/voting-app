@@ -1,9 +1,7 @@
-import { randomUUID } from "crypto";
-
 export const mockVotings = [
     {
-        id: randomUUID(),
-        voting_id: randomUUID(),
+        id: Math.random().toString().replace(".", "x"),
+        voting_id: Math.random().toString().replace(".", "x"),
         userPic: "https://avatars.githubusercontent.com/u/113932706?v=4",
         username: "John Doe",
         timestamp: new Date(Date.now()),
@@ -12,8 +10,8 @@ export const mockVotings = [
         options: ["JavaScript", "Python"],
     },
     {
-        id: randomUUID(),
-        voting_id: randomUUID(),
+        id: Math.random().toString().replace(".", "x"),
+        voting_id: Math.random().toString().replace(".", "x"),
         userPic: "https://avatars.githubusercontent.com/u/113932706?v=4",
         username: "John Doe",
         timestamp: new Date(Date.now() - 60 * 60 * 1000),
@@ -22,8 +20,8 @@ export const mockVotings = [
         options: ["JavaScript", "Python"],
     },
     {
-        id: randomUUID(),
-        voting_id: randomUUID(),
+        id: Math.random().toString().replace(".", "x"),
+        voting_id: Math.random().toString().replace(".", "x"),
         userPic: "https://avatars.githubusercontent.com/u/113932706?v=4",
         username: "John Doe",
         timestamp: new Date(Date.now() - 60 * 60 * 123000),

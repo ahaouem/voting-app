@@ -6,6 +6,7 @@ import { useAddress, useContract, useMetamask, useContractWrite } from "@thirdwe
 import { ethers } from "ethers";
 // import { EditionMetadataWithOwnerOutputSchema } from "@thirdweb-dev/sdk";
 import { VOTING_ADDRESS } from "@/contracts";
+import { IVoting } from "@/types";
 
 const StateContext = createContext({
     // address: "",
@@ -13,23 +14,25 @@ const StateContext = createContext({
     // connect: () => {},
     createPoll: async ({ form }: { form: any }) => {},
     vote: async ({ pollId, choice }: { pollId: number; choice: number }) => {},
+    getPoll: async (pollId: number) => {},
+    getAllPolls: async (): Promise<IVoting[] | undefined> => {},
     getOwner: async (pollId: number) => {},
     getAllVoteCount: async (pollId: number) => {},
     getChoiceCount: async (pollId: number, choice: number) => {},
     getChoiceVotersAddresses: async (pollId: number, choice: number) => {},
 });
 
-export const StateContextProvider = ({ children }: { children: any }) => {
+export const StateContextProvider = ({ children }: { children: any }): JSX.Element => {
     const { contract, isLoading, error, fetchStatus } = useContract(VOTING_ADDRESS);
-    const { mutateAsync: create } = useContractWrite(contract, "createPoll");
+    const { mutateAsync: createPoll } = useContractWrite(contract, "createPoll");
 
     // const address = useAddress();
     const address = "0x0858af1619831E174d1C98C7A33dBc212EE171dD";
     // const connect = useMetamask();
 
-    const createPoll = async ({ form }: { form: any }) => {
+    const publishPoll = async ({ form }: { form: any }) => {
         try {
-            const data = await create({
+            const data = await createPoll({
                 args: [
                     address, // msg.sender
                     form.title, // string
@@ -44,6 +47,24 @@ export const StateContextProvider = ({ children }: { children: any }) => {
             });
 
             console.log(data);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    const getPoll = async (pollId: number) => {
+        try {
+            const data = await contract?.call("getPoll", [pollId]);
+
+            console.log(data);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    const getAllPolls = async (): Promise<IVoting[] | undefined> => {
+        try {
+            return await contract?.call("getAllPolls");
         } catch (error) {
             console.error(error);
         }
@@ -105,9 +126,10 @@ export const StateContextProvider = ({ children }: { children: any }) => {
     return (
         <StateContext.Provider
             value={{
-                // connect,
-                createPoll,
+                createPoll: publishPoll,
                 vote,
+                getPoll,
+                getAllPolls,
                 getOwner,
                 getAllVoteCount,
                 getChoiceCount,
